@@ -10,8 +10,8 @@ from data_schematizations import ProfileSchematization
 from data_calculation import CustomVerticalRevetmentZoneDefinition
 from seiches_io import *
 from seiches_io_references import *
-from data_time_series import WaterLevelTimeSeries, MeasuredSurgeSeries
-from seiches_time_series import read_signal_from_file
+from data_time_series import WaterLevelTimeSeries, MeasuredSurgeSeries, SeicheType
+from seiches_time_series import read_signal_from_file, generate_surge
 from pydrever.data import (
     RevetmentZoneSpecification,
     HorizontalRevetmentZoneDefinition,
@@ -25,8 +25,10 @@ from pydrever.data import (
 )
 
 
-def get_calculation_name(sch: ProfileSchematization, time_series_name, free_board: float, measured: bool | None):
-    base_calculation_name = "Profile " + sch.value + " - " + time_series_name + " - " + format(free_board, ".1f")
+def get_calculation_name(sch: ProfileSchematization, time_series_name, free_board: float | None = None, measured: bool | None = None):
+    base_calculation_name = "Profile " + sch.value + " - " + time_series_name
+    if free_board is not None:
+        base_calculation_name = base_calculation_name + " - " + format(free_board, ".1f")
     if measured is not None:
         return base_calculation_name + " - " + ("gemeten" if measured else "gefilterd")
 
@@ -225,6 +227,16 @@ measured_time_series = [
     ["Tijdserie 8", read_measured_time_series("8")],
     ["Tijdserie 9", read_measured_time_series("9")],
     ["Tijdserie 10", read_measured_time_series("10")],
+]
+
+schematized_time_series = [
+    ["Geen seiches", generate_surge(SeicheType.NoSeiches)],
+    ["NSE", generate_surge(SeicheType.Nse)],
+    ["Scenario 1 (Basis periode)", generate_surge(SeicheType.BasePeriod)],
+    ["Scenario 2 (Twee pieken)", generate_surge(SeicheType.TwoPeaks)],
+    ["Scenario 3 (Piek links)", generate_surge(SeicheType.LeftPeak)],
+    ["Scenario 4 (Piek rechts)", generate_surge(SeicheType.RightPeak)],
+    ["Scenario 5 (Drie periodes)", generate_surge(SeicheType.ThreePeriods)],
 ]
 
 profiles = [ProfileSchematization.A, ProfileSchematization.B, ProfileSchematization.C]

@@ -11,6 +11,7 @@ def save(obj, filename, verbose: bool = False):
         filename: File path to save to (e.g., 'data.pkl')
     """
 
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, "wb") as f:
         pickle.dump(obj, f)
     if verbose:

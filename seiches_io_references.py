@@ -1,5 +1,4 @@
 import os
-from data_calculation import CalculationType
 
 # analysis
 #   - data
@@ -24,15 +23,13 @@ profiles_dir = os.path.join(base_dir_code, "data")
 time_series_dir = profiles_dir
 
 base_output_dir = os.path.join(base_dir_results, "output")
-asphalt_output_dir = os.path.join(base_output_dir, CalculationType.Asphalt.value)
-grass_wave_impact_output_dir = os.path.join(base_output_dir, CalculationType.GrassWaveImpact.value)
-grass_wave_overtopping_output_dir = os.path.join(base_output_dir, CalculationType.GrassWaveOvertopping.value)
-grass_wave_runup_output_dir = os.path.join(base_output_dir, CalculationType.GrassWaveRunup.value)
 realistic_output_dir = os.path.join(base_output_dir, "realistic")
+schematic_output_dir = os.path.join(base_output_dir, "schematic")
+os.makedirs(os.path.dirname(realistic_output_dir), exist_ok=True)
+os.makedirs(os.path.dirname(schematic_output_dir), exist_ok=True)
 
 base_figures_dir = os.path.join(base_dir_results, "visualization")
-asphalt_figures_dir = os.path.join(base_figures_dir, CalculationType.Asphalt.value)
-grass_wave_impact_figures_dir = os.path.join(base_figures_dir, CalculationType.GrassWaveImpact.value)
-grass_wave_overtopping_figures_dir = os.path.join(base_figures_dir, CalculationType.GrassWaveOvertopping.value)
-grass_wave_runup_figures_dir = os.path.join(base_figures_dir, CalculationType.GrassWaveRunup.value)
 realistic_figures_dir = os.path.join(base_figures_dir, "realistic")
+schematic_figures_dir = os.path.join(base_figures_dir, "schematic")
+os.makedirs(os.path.dirname(realistic_figures_dir), exist_ok=True)
+os.makedirs(os.path.dirname(schematic_figures_dir), exist_ok=True)

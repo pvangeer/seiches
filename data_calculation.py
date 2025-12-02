@@ -1,12 +1,4 @@
-from enum import Enum
 from pydrever.data import VerticalRevetmentZoneDefinition, DikeSchematization
-
-
-class CalculationType(Enum):
-    Asphalt = "asphalt"
-    GrassWaveImpact = "grass_wave_impact"
-    GrassWaveRunup = "grass_wave_runup"
-    GrassWaveOvertopping = "grass_wave_overtopping"
 
 
 class CustomVerticalRevetmentZoneDefinition(VerticalRevetmentZoneDefinition):
